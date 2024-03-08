@@ -8,22 +8,25 @@ int main()
     shuffleDeck(&balicek);
     //*********
 
-    Gamestate hra;
-    Deck table;
-    drawCardsDeck(5, &balicek, &table);
-
-    hra.pot = 0;
-    hra.cur_bet = 100;
-    hra.table = table;
-
-        //------
+    //------
+    //*balicek = balicek dealera
     //! Player init
-    // Hrac p1 = {
-    //     .money = 10000,
-    //     .balicek_hrace = {0}};
-    // Hrac p2 = {
-    //     .money = 10000,
-    //     .balicek_hrace = {0}};
+    Hrac p1 = {
+        .money = 10000,
+        .balicek_hrace = {0}};
+    Hrac dealer = {
+        .money = 10000,
+        .balicek_hrace = {0}};
+    //*game seq
+    drawCards(1, &p1, &balicek);
+    drawCards(1, &dealer, &balicek);
+    printf("dealer\n");
+    for (int i = 0; i < dealer.balicek_hrace->curr_size; i++)
+    {
+        printf("[X]");
+    }
+    printf("\n");
+    printPlayerInfo(&p1);
 
     return 0;
 }

@@ -48,7 +48,7 @@ typedef struct
 typedef struct
 {
     int pot;
-    int cur_bet;
+    int min_bet;
     Deck table;
 
 } Gamestate;

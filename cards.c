@@ -19,7 +19,7 @@ void printDeck(Deck *deck)
     const char *values[] = {"Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"};
     for (int i = 0; i < deck->curr_size; i++)
     {
-        printf("Value : %8s | Symbol : %8s\n", values[deck->cards[i].value - 2], suits[deck->cards[i].suit]);
+        printf("[%5s|%7s]\n", values[deck->cards[i].value - 2], suits[deck->cards[i].suit]);
     }
 }
 void initializeDeck(Deck *deck)
