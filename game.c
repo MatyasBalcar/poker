@@ -28,12 +28,17 @@ int main()
     {
 
         drawCards(1, &p1, &balicek);
-        drawCards(1, &dealer, &balicek);
+
         int playerScore = 0;
         int bet = 0;
         printf("How much do you want to bet? ");
         scanf("%d", &bet);
         p1.money -= bet;
+
+        drawCards(2, &dealer, &balicek);
+        printf("Dealer\n\n");
+        printDeck(dealer.balicek_hrace);
+        printf("\n");
         while (running)
         {
 
@@ -94,16 +99,17 @@ int main()
         scanf(" %c", &to_continue);
         if (to_continue == 'y' || to_continue == 'Y')
         {
-            drawCards(1, &p1, &balicek);
-            printPlayerInfo(&p1);
-            DeckValue deckValues = calculateDeckValue(p1.balicek_hrace);
-            int value = deckValues.minValue < deckValues.maxValue ? deckValues.minValue : deckValues.maxValue;
-            if (value > 21)
-            {
-                printf("BUST, dealer wins\n");
-                running = 0;
-                dealer_playing = 0;
-            }
+            // Reset player's deck
+            Deck newPlayerDeck;
+            initializeEmptyDeck(&newPlayerDeck);
+            p1.balicek_hrace[0] = newPlayerDeck;
+
+            // Reset dealer's deck
+            Deck newDealerDeck;
+            initializeEmptyDeck(&newDealerDeck);
+            dealer.balicek_hrace[0] = newDealerDeck;
+            running = 1;
+            dealer_playing = 1;
         }
         else
         {
