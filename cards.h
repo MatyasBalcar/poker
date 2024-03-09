@@ -62,6 +62,7 @@ DeckValue calculateDeckValue(Deck *deck);
 void initializeDeck(Deck *deck);
 void shuffleDeck(Deck *deck);
 void printDeck(Deck *deck);
+void initializeEmptyDeck(Deck *deck);
 Card drawCard(Deck *deck, int *size);
 void drawCards(int count, Hrac *player, Deck *deck);
 void drawCardsDeck(int count, Deck *sourceDeck, Deck *targetDeck);

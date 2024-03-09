@@ -147,3 +147,7 @@ DeckValue calculateDeckValue(Deck *deck)
 
     return deckValue;
 }
+void initializeEmptyDeck(Deck *deck)
+{
+    deck->curr_size = 0;
+}
