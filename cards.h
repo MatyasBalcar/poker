@@ -44,6 +44,7 @@ typedef struct
 {
     Deck balicek_hrace[1];
     int money;
+    int is_dealer;
 } Hrac;
 typedef struct
 {
@@ -52,6 +53,12 @@ typedef struct
     Deck table;
 
 } Gamestate;
+typedef struct
+{
+    int minValue;
+    int maxValue;
+} DeckValue;
+DeckValue calculateDeckValue(Deck *deck);
 void initializeDeck(Deck *deck);
 void shuffleDeck(Deck *deck);
 void printDeck(Deck *deck);

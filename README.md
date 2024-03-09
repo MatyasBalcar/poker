@@ -52,18 +52,13 @@ _Usage_
     .money  = 10000;
     .balicek_hrace = {{0}};
 
-**Gamestate**
-Is a ds, that stores the current state of the game, with a deck, a pot, and the current minimum bet,
-_Usage_
-
-    Gamestate  hra;D
-    Deck  table;
-    drawCardsDeck(5, &balicek, &table);
-    hra.pot  =  0;
-    hra.cur_bet  =  100;
-    hra.table  =  table;
+**Deckvalue**
+Deck value is a ds that contains to int, because and ace can be counted as 1 or as 14, so there is minValue and maxValue
 
 ### Functions
+
+**calculateDeckValue**
+A function that takes in a deck pointer, and calculates its deckValue, return a special ds called **Deckvalue**
 
 **initializeDeck**
 This one takes in a deck pointer and initializes the deck.
@@ -76,7 +71,6 @@ This one takes in a deck pointer and schuffles it randomly.
     void  shuffleDeck(Deck  *deck);
 
 **printDeck**
-This one takes in a deck pointer a prints all the cards ina deck
 
 **printPlayerInfo**
 This one takes in a player pointer and prints his deck and money

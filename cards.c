@@ -15,11 +15,11 @@ void shuffleDeck(Deck *deck)
 }
 void printDeck(Deck *deck)
 {
-    const char *suits[] = {"Hearts", "Diamonds", "Clubs", "Spades"};
-    const char *values[] = {"Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"};
+    const char *suits[] = {"\u2665", "\u2666", "\u2663", "\u2660"}; // Hearts, Diamonds, Clubs, Spades
+    const char *values[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
     for (int i = 0; i < deck->curr_size; i++)
     {
-        printf("[%5s|%7s]\n", values[deck->cards[i].value - 2], suits[deck->cards[i].suit]);
+        printf("[%s|%s]\n", values[deck->cards[i].value - 2], suits[deck->cards[i].suit]);
     }
 }
 void initializeDeck(Deck *deck)
@@ -33,9 +33,28 @@ void initializeDeck(Deck *deck)
 }
 void printPlayerInfo(Hrac *hracp)
 {
-    printf("Money: %d\n", hracp->money);
-    printf("Balicek:\n");
-    printDeck(hracp->balicek_hrace);
+    if (hracp->is_dealer)
+    {
+        printf("Dealer:\n");
+        printf("Balicek:\n");
+        int value1, value2;
+        DeckValue hodnota = calculateDeckValue(hracp->balicek_hrace);
+        value1 = hodnota.minValue;
+        value2 = hodnota.maxValue;
+        printf("%d|%d \n", value1, value2);
+        printDeck(hracp->balicek_hrace);
+    }
+    else
+    {
+        printf("Money: %d\n", hracp->money);
+        printf("Balicek:\n");
+        int value1, value2;
+        DeckValue hodnota = calculateDeckValue(hracp->balicek_hrace);
+        value1 = hodnota.minValue;
+        value2 = hodnota.maxValue;
+        printf("%d|%d \n", value1, value2);
+        printDeck(hracp->balicek_hrace);
+    }
 }
 Card drawCard(Deck *deck, int *size)
 {
@@ -95,10 +114,36 @@ void drawCardsDeck(int count, Deck *sourceDeck, Deck *targetDeck)
 }
 void printNCardsFromDeck(Deck *deck, int n)
 {
-    const char *suits[] = {"Hearts", "Diamonds", "Clubs", "Spades"};
-    const char *values[] = {"Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"};
+    const char *suits[] = {"\u2665", "\u2666", "\u2663", "\u2660"}; // Hearts, Diamonds, Clubs, Spades
+    const char *values[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
     for (int i = 0; i < n; i++)
     {
-        printf("Value : %8s | Symbol : %8s\n", values[deck->cards[i].value - 2], suits[deck->cards[i].suit]);
+        printf("[%s|%s]\n", values[deck->cards[i].value - 2], suits[deck->cards[i].suit]);
     }
+}
+DeckValue calculateDeckValue(Deck *deck)
+{
+    DeckValue deckValue = {0, 0};
+
+    for (int i = 0; i < deck->curr_size; i++)
+    {
+        int cardValue = deck->cards[i].value;
+        if (cardValue == 14)
+        { // Ace
+            deckValue.minValue += 1;
+            deckValue.maxValue += 14;
+        }
+        else if (cardValue >= 11)
+        { // Jack, Queen, King
+            deckValue.minValue += 10;
+            deckValue.maxValue += 10;
+        }
+        else
+        { // 2-10
+            deckValue.minValue += cardValue;
+            deckValue.maxValue += cardValue;
+        }
+    }
+
+    return deckValue;
 }
