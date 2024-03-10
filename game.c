@@ -33,6 +33,11 @@ int main()
         int bet = 0;
         printf("How much do you want to bet? ");
         scanf("%d", &bet);
+        if (bet > p1.money)
+        {
+            printf("Betting over limit => all in\n Betting %d\n", p1.money);
+            bet = p1.money;
+        }
         p1.money -= bet;
 
         drawCards(2, &dealer, &balicek);
@@ -72,7 +77,7 @@ int main()
         while (dealer_playing)
         {
             DeckValue deckValues = calculateDeckValue(dealer.balicek_hrace);
-            int dvalue = deckValues.minValue > deckValues.maxValue ? deckValues.minValue : deckValues.maxValue;
+            int dvalue = deckValues.minValue < deckValues.maxValue ? deckValues.minValue : deckValues.maxValue;
             if (dvalue <= playerScore)
             {
                 drawCards(1, &dealer, &balicek);
