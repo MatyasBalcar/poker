@@ -1,6 +1,6 @@
 # Welcome to cards!
 
-This is a game and a library to either play the game of poker, or _(more likely)_ use the cards library thats explained bellow, to create yur own card games.
+This is a game and a library to either play the game of poker, or _(more likely)_ use the cards library thats explained bellow, to create your own card games.
 
 # Game
 
@@ -19,7 +19,7 @@ Its also recomended to set terminal for black backgroudn for the color to look r
 
 This is a dynamically linked c (_libcards.so_)library that you will need to add to you code, or simply put the
 
-    cards.c and cards.h i
+    cards.c and cards.h
 
 into your project folder and put
 

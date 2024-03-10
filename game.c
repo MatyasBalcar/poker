@@ -35,7 +35,7 @@ int main()
         scanf("%d", &bet);
         if (bet > p1.money)
         {
-            printf("Betting over limit => all in\n Betting %d\n", p1.money);
+            printf("Betting over limit => all in\n--->Betting %d\n", p1.money);
             bet = p1.money;
         }
         p1.money -= bet;
