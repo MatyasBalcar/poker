@@ -37,7 +37,7 @@ int main()
 
         drawCards(2, &dealer, &balicek);
         printf("Dealer\n\n");
-        printDeck(dealer.balicek_hrace);
+        printDealerInitial(dealer.balicek_hrace);
         printf("\n");
         while (running)
         {
@@ -94,6 +94,11 @@ int main()
             }
         }
         printf("Current player money :%d\n", p1.money);
+        if (p1.money <= 0)
+        {
+            printf("Ending game, out of money\n");
+            return 0;
+        }
         char to_continue;
         printf("Do you want to continue? (y/n): ");
         scanf(" %c", &to_continue);

@@ -15,11 +15,19 @@ void shuffleDeck(Deck *deck)
 }
 void printDeck(Deck *deck)
 {
-    const char *suits[] = {"\u2665", "\u2666", "\u2663", "\u2660"}; // Hearts, Diamonds, Clubs, Spades
+    const char *suits[] = {"\033[31m\u2665\033[0m", "\033[31m\u2666\033[0m", "\u2663", "\u2660"}; // Hearts, Diamonds, Clubs, Spades
     const char *values[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
     for (int i = 0; i < deck->curr_size; i++)
     {
-        printf("[%s|%s]\n", values[deck->cards[i].value - 2], suits[deck->cards[i].suit]);
+        printf("-----------\n"
+               "| %s     %s |\n"
+               "|         |\n"
+               "|   %2s    |\n"
+               "|         |\n"
+               "| %s     %s |\n"
+               "-----------\n",
+               suits[deck->cards[i].suit],
+               suits[deck->cards[i].suit], values[deck->cards[i].value - 2], suits[deck->cards[i].suit], suits[deck->cards[i].suit]);
     }
 }
 void initializeDeck(Deck *deck)
@@ -31,6 +39,7 @@ void initializeDeck(Deck *deck)
     }
     deck->curr_size = 52;
 }
+
 void printPlayerInfo(Hrac *hracp)
 {
     if (hracp->is_dealer)
@@ -114,11 +123,19 @@ void drawCardsDeck(int count, Deck *sourceDeck, Deck *targetDeck)
 }
 void printNCardsFromDeck(Deck *deck, int n)
 {
-    const char *suits[] = {"\u2665", "\u2666", "\u2663", "\u2660"}; // Hearts, Diamonds, Clubs, Spades
+    const char *suits[] = {"\033[31m\u2665\033[0m", "\033[31m\u2666\033[0m", "\u2663", "\u2660"}; // Hearts, Diamonds, Clubs, Spades
     const char *values[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
     for (int i = 0; i < n; i++)
     {
-        printf("[%s|%s]\n", values[deck->cards[i].value - 2], suits[deck->cards[i].suit]);
+        printf("-----------\n"
+               "| %s     %s |\n"
+               "|         |\n"
+               "|   %2s    |\n"
+               "|         |\n"
+               "| %s     %s |\n"
+               "-----------\n",
+               suits[deck->cards[i].suit],
+               suits[deck->cards[i].suit], values[deck->cards[i].value - 2], suits[deck->cards[i].suit], suits[deck->cards[i].suit]);
     }
 }
 DeckValue calculateDeckValue(Deck *deck)
@@ -150,4 +167,26 @@ DeckValue calculateDeckValue(Deck *deck)
 void initializeEmptyDeck(Deck *deck)
 {
     deck->curr_size = 0;
+}
+void printDealerInitial(Deck *deckp)
+{
+    const char *suits[] = {"\033[31m\u2665\033[0m", "\033[31m\u2666\033[0m", "\u2663", "\u2660"}; // Hearts, Diamonds, Clubs, Spades
+    const char *values[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+
+    printf("-----------\n"
+           "| X     X |\n"
+           "|         |\n"
+           "|    X    |\n"
+           "|         |\n"
+           "| X     X |\n"
+           "-----------\n");
+    printf("-----------\n"
+           "| %s     %s |\n"
+           "|         |\n"
+           "|   %2s    |\n"
+           "|         |\n"
+           "| %s     %s |\n"
+           "-----------\n",
+           suits[deckp->cards[1].suit],
+           suits[deckp->cards[1].suit], values[deckp->cards[1].value - 2], suits[deckp->cards[1].suit], suits[deckp->cards[1].suit]);
 }

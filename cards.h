@@ -68,4 +68,5 @@ void drawCards(int count, Hrac *player, Deck *deck);
 void drawCardsDeck(int count, Deck *sourceDeck, Deck *targetDeck);
 void printPlayerInfo(Hrac *hracp);
 void printNCardsFromDeck(Deck *deck, int n);
+void printDealerInitial(Deck *deckp);
 #endif // CARDS_H
